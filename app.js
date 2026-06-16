@@ -193,4 +193,99 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', render);
+// ── Vocabulary Notebook ──────────────────────────────────────
+const K_VOCAB = 'eng_vocab';
+let vocabFilter = 'all';
+
+function getVocab() { return get(K_VOCAB) || []; }
+
+function getWeekStart() {
+  const d = new Date();
+  d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+  return d.toISOString().slice(0, 10);
+}
+
+window.addVocab = function () {
+  const wordEl = document.getElementById('vocab-word');
+  const meaningEl = document.getElementById('vocab-meaning');
+  const word = wordEl.value.trim();
+  const meaning = meaningEl.value.trim();
+  if (!word) { wordEl.focus(); return; }
+
+  const vocab = getVocab();
+  vocab.unshift({ id: Date.now(), word, meaning, date: todayStr() });
+  set(K_VOCAB, vocab);
+  wordEl.value = '';
+  meaningEl.value = '';
+  wordEl.focus();
+  renderVocab();
+};
+
+window.deleteVocab = function (id) {
+  const vocab = getVocab().filter(v => v.id !== id);
+  set(K_VOCAB, vocab);
+  renderVocab();
+};
+
+window.filterVocab = function (f, btn) {
+  vocabFilter = f;
+  document.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderVocab();
+};
+
+window.exportVocab = function () {
+  const vocab = getVocab();
+  if (!vocab.length) { alert('No words saved yet!'); return; }
+  const text = vocab.map(v => `${v.word}${v.meaning ? ' — ' + v.meaning : ''} (${v.date})`).join('\n');
+  const blob = new Blob([text], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'english-vocabulary.txt';
+  a.click();
+};
+
+function renderVocab() {
+  const vocab = getVocab();
+  const today = todayStr();
+  const weekStart = getWeekStart();
+
+  let filtered = vocab;
+  if (vocabFilter === 'today') filtered = vocab.filter(v => v.date === today);
+  if (vocabFilter === 'week') filtered = vocab.filter(v => v.date >= weekStart);
+
+  document.getElementById('vocab-total').textContent = vocab.length;
+  document.getElementById('vocab-today-count').textContent = vocab.filter(v => v.date === today).length;
+
+  const list = document.getElementById('vocab-list');
+  if (!filtered.length) {
+    list.innerHTML = '';
+    return;
+  }
+  list.innerHTML = filtered.map(v => `
+    <div class="vocab-item${v.date === today ? ' today-word' : ''}">
+      <div class="vocab-word-col">
+        <div class="vocab-word">${escHtml(v.word)}</div>
+        ${v.meaning ? `<div class="vocab-meaning">${escHtml(v.meaning)}</div>` : ''}
+        <div class="vocab-date">${v.date}</div>
+      </div>
+      <button class="vocab-delete" onclick="deleteVocab(${v.id})" title="Delete">✕</button>
+    </div>
+  `).join('');
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Enter key support for vocab input
+document.addEventListener('DOMContentLoaded', () => {
+  render();
+  renderVocab();
+  document.getElementById('vocab-meaning').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addVocab();
+  });
+  document.getElementById('vocab-word').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('vocab-meaning').focus();
+  });
+});

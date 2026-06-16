@@ -122,6 +122,31 @@
   <!-- Share -->
   <button class="share-btn" onclick="shareStreak()">📤 Share my streak</button>
 
+  <!-- Vocabulary Notebook -->
+  <div class="section-title">📒 My vocabulary notebook</div>
+  <div class="vocab-card">
+    <div class="vocab-stats-row">
+      <div class="vocab-stat"><span id="vocab-total">0</span> words saved</div>
+      <div class="vocab-stat accent">Today: <span id="vocab-today-count">0</span></div>
+    </div>
+
+    <div class="vocab-input-row">
+      <input type="text" id="vocab-word" placeholder="New word..." maxlength="50" />
+      <input type="text" id="vocab-meaning" placeholder="Meaning / example..." maxlength="120" />
+      <button class="vocab-add-btn" onclick="addVocab()">+ Add</button>
+    </div>
+
+    <div class="vocab-filter-row">
+      <button class="vf-btn active" onclick="filterVocab('all', this)">All</button>
+      <button class="vf-btn" onclick="filterVocab('today', this)">Today</button>
+      <button class="vf-btn" onclick="filterVocab('week', this)">This week</button>
+    </div>
+
+    <div class="vocab-list" id="vocab-list"></div>
+
+    <button class="vocab-export-btn" onclick="exportVocab()">📥 Export as text</button>
+  </div>
+
   <!-- Install hint -->
   <div class="install-hint" id="install-hint" style="display:none">
     💡 Add to home screen: tap <strong>Share</strong> → <strong>Add to Home Screen</strong>

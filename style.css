@@ -299,7 +299,134 @@ html, body {
 .cal-day.empty { background: transparent; }
 .cal-day.future { opacity: 0.25; }
 
-/* Share / Install */
+/* Vocabulary Notebook */
+.vocab-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 0 16px 16px;
+}
+.vocab-stats-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 600;
+}
+.vocab-stats-row .accent { color: var(--accent); }
+
+.vocab-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.vocab-input-row input {
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.vocab-input-row input:focus { border-color: var(--accent); }
+.vocab-input-row input::placeholder { color: var(--text3); }
+.vocab-add-btn {
+  padding: 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.vocab-add-btn:active { transform: scale(0.97); background: #ea580c; }
+
+.vocab-filter-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.vf-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.vf-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.vocab-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+.vocab-list:empty::after {
+  content: 'No words yet — add your first word above! 💡';
+  display: block;
+  text-align: center;
+  color: var(--text3);
+  font-size: 13px;
+  padding: 20px 0;
+}
+.vocab-item {
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-left: 3px solid var(--accent);
+}
+.vocab-item.today-word { border-left-color: var(--green); }
+.vocab-word-col { flex: 1; }
+.vocab-word { font-size: 15px; font-weight: 700; color: var(--text); }
+.vocab-meaning { font-size: 12px; color: var(--text2); margin-top: 3px; line-height: 1.4; }
+.vocab-date { font-size: 10px; color: var(--text3); margin-top: 4px; }
+.vocab-delete {
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+.vocab-delete:hover { color: #ef4444; }
+
+.vocab-export-btn {
+  width: 100%;
+  padding: 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.vocab-export-btn:active { background: var(--card2); }
+
 .share-btn {
   display: block;
   width: calc(100% - 32px);

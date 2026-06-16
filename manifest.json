@@ -2,21 +2,21 @@
   "name": "English Streak Tracker",
   "short_name": "English Streak",
   "description": "Track your daily English communication streak",
-  "start_url": "/English-streak/",
-  "scope": "/English-streak/",
+  "start_url": "https://lakshmisowjanyapaidikondala.github.io/English-streak/",
+  "scope": "https://lakshmisowjanyapaidikondala.github.io/English-streak/",
   "display": "standalone",
   "background_color": "#0f0f1a",
   "theme_color": "#f97316",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "https://lakshmisowjanyapaidikondala.github.io/English-streak/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "https://lakshmisowjanyapaidikondala.github.io/English-streak/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

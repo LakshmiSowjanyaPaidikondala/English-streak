@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="English Streak" />
+  <title>English Streak</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-top">
+      <div class="logo">🗣️ English Streak</div>
+      <div class="date-badge" id="date-badge"></div>
+    </div>
+  </header>
+
+  <!-- Hero Streak Card -->
+  <div class="streak-hero">
+    <div class="flame-wrap">
+      <div class="flame" id="flame-icon">🔥</div>
+    </div>
+    <div class="streak-info">
+      <div class="streak-number" id="streak-num">0</div>
+      <div class="streak-label">day streak</div>
+    </div>
+    <div class="motivation" id="motivation-text">Start your streak today!</div>
+  </div>
+
+  <!-- Week Row -->
+  <div class="week-card">
+    <div class="week-label">This week</div>
+    <div class="week-row" id="week-row"></div>
+  </div>
+
+  <!-- Check-in Button -->
+  <button class="checkin-btn" id="checkin-btn" onclick="toggleToday()">
+    <span id="checkin-label">Mark today as done ✓</span>
+  </button>
+
+  <!-- Activities -->
+  <div class="section-title">What did you practice today?</div>
+  <div class="activities" id="activities">
+    <div class="act" onclick="toggleAct(this)" data-key="speaking">
+      <div class="act-emoji">🎙️</div>
+      <div class="act-body">
+        <div class="act-name">Speaking</div>
+        <div class="act-desc">Spoke English for 5+ min</div>
+      </div>
+      <div class="act-check">✓</div>
+    </div>
+    <div class="act" onclick="toggleAct(this)" data-key="listening">
+      <div class="act-emoji">🎧</div>
+      <div class="act-body">
+        <div class="act-name">Listening</div>
+        <div class="act-desc">Podcast, video, audio</div>
+      </div>
+      <div class="act-check">✓</div>
+    </div>
+    <div class="act" onclick="toggleAct(this)" data-key="reading">
+      <div class="act-emoji">📖</div>
+      <div class="act-body">
+        <div class="act-name">Reading</div>
+        <div class="act-desc">Article, book, news</div>
+      </div>
+      <div class="act-check">✓</div>
+    </div>
+    <div class="act" onclick="toggleAct(this)" data-key="writing">
+      <div class="act-emoji">✍️</div>
+      <div class="act-body">
+        <div class="act-name">Writing</div>
+        <div class="act-desc">Journal, chat, notes</div>
+      </div>
+      <div class="act-check">✓</div>
+    </div>
+    <div class="act" onclick="toggleAct(this)" data-key="vocab">
+      <div class="act-emoji">💡</div>
+      <div class="act-body">
+        <div class="act-name">Vocabulary</div>
+        <div class="act-desc">Learned new words</div>
+      </div>
+      <div class="act-check">✓</div>
+    </div>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num" id="best-streak">0</div>
+      <div class="stat-lbl">Best streak</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="total-days">0</div>
+      <div class="stat-lbl">Total days</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="this-month">0</div>
+      <div class="stat-lbl">This month</div>
+    </div>
+  </div>
+
+  <!-- Month Calendar -->
+  <div class="section-title">This month</div>
+  <div class="calendar-card">
+    <div class="cal-days-header">
+      <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+
+  <!-- Share -->
+  <button class="share-btn" onclick="shareStreak()">📤 Share my streak</button>
+
+  <!-- Install hint -->
+  <div class="install-hint" id="install-hint" style="display:none">
+    💡 Add to home screen: tap <strong>Share</strong> → <strong>Add to Home Screen</strong>
+  </div>
+
+  <div class="footer">Made with ❤️ — practice daily, grow daily</div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
